@@ -130,8 +130,8 @@ const render = (
   // want to get an identifier from the `ReactInstanceHandles` component.
   //
   // Next we instantiate a new ReactComponent from the ReactElement passed in.
-  // See [React glossary](https://facebook.github.io/react/docs/glossary.html) for more context on the relationship between
-  // ReactComponent and ReactElement.
+  // See [React glossary](https://facebook.github.io/react/docs/glossary.html)
+  // for more context on the relationship between ReactComponent and ReactElement.
   const rootId = ReactInstanceHandles.createReactRootID(0);
   const component = instantiateReactComponent(nextElement);
 
