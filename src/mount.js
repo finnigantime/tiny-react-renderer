@@ -1,6 +1,6 @@
 /***
  * Welcome to the Tiny React Renderer.
- * 
+ *
  * You should read this guide in the following order:
  *
  * 1. mount.js
@@ -66,6 +66,7 @@
 const invariants = require('./utilities/invariants');
 const instantiateReactComponent = require('react/lib/instantiateReactComponent');
 const ReactInstanceHandles = require('react/lib/ReactInstanceHandles');
+const ReactReconciler = require('react/lib/ReactReconciler');
 const ReactUpdates = require('react/lib/ReactUpdates');
 const DefaultInjection = require('./injection');
 
@@ -128,7 +129,7 @@ const render = (
   // Woohoo! The consumer has now made it to the point where we’re interacting
   // with React internals! Since any application can have multiple roots, we
   // want to get an identifier from the `ReactInstanceHandles` component.
-  // 
+  //
   // Next we instantiate a new ReactComponent from the ReactElement passed in.
   const rootId = ReactInstanceHandles.createReactRootID(0);
   const component = instantiateReactComponent(nextElement);
@@ -151,12 +152,12 @@ const render = (
     const transaction = ReactUpdates.ReactReconcileTransaction.getPooled();
     transaction.perform(() => {
       // the `component` here is an instance of your
-      // `ReactCustomRendererComponent` class. To be 100% honest, I’m not
-      // certain if the method signature is enforced by React core or if it is
-      // renderer specific. This is following the ReactDOM renderer. The
-      // important piece is that we pass our transaction and rootId through, in
-      // addition to any other contextual information needed.
-      component.mountComponent(
+      // `ReactCustomRendererComponent` class.
+      // Instead of calling component.mountComponent() directly, call
+      // ReactReconciler.mountComponent() which will do some bookkeeping
+      // before calling component.mountComponent() internally.
+      ReactReconciler.mountComponent(
+        component,
         transaction,
         rootId,
         {_idCounter: 0},
