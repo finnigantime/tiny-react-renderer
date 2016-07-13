@@ -20,8 +20,7 @@ AppRegistry.registerComponent('MyApp', () => MyApp);
 ```
 
 This is where your application enters into the React domain and comes alive. Your
-root React element gets created and attached to some existing element in the host
-environment ('app' in this case).
+root React element is instantiated and attached to the host environment.
 
 If you follow either the ReactDOM or React Native codebases from where these
 methods are defined you will quickly find yourself at the `React{Host}Mount.js`
